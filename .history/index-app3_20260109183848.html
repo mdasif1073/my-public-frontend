@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Server Uptime</title>
+</head>
+<body>
+    <h1>App #3: Server Process Uptime</h1>
+    <button onclick="fetchUptime()">Refresh Uptime</button>
+    <h2>This backend process has been running for: <span id="uptime-display">N/A</span> seconds</h2>
+
+    <script>
+        const apiUrl = 'https://api3.mdasif-code.me';
+
+        async function fetchUptime() {
+            const display = document.getElementById('uptime-display');
+            display.textContent = '...';
+            try {
+                const response = await fetch(`${apiUrl}/api/uptime`);
+                const data = await response.json();
+                display.textContent = data.uptime_seconds;
+            } catch (error) {
+                console.error('Error:', error);
+                display.textContent = 'Error!';
+            }
+        }
+        
+        // Fetch the uptime when the page loads
+        window.onload = fetchUptime;
+    </script>
+</body>
+</html>

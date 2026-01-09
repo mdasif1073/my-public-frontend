@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Random Number Generator</title>
+</head>
+<body>
+    <h1>App #2: Random Number Generator</h1>
+    <button onclick="fetchRandomNumber()">Get New Random Number</button>
+    <h2>Your Number: <span id="number-display">N/A</span></h2>
+
+    <script>
+        const apiUrl = 'https://api2.mdasif-code.me';
+
+        async function fetchRandomNumber() {
+            const display = document.getElementById('number-display');
+            display.textContent = '...';
+            try {
+                const response = await fetch(`${apiUrl}/api/random`);
+                const data = await response.json();
+                display.textContent = data.random_number;
+            } catch (error) {
+                console.error('Error:', error);
+                display.textContent = 'Error!';
+            }
+        }
+    </script>
+</body>
+</html>
